@@ -6,6 +6,18 @@ This module allows you to use lift-json in your play20 application.
 
 ## Usage
 
+```scala
+// your play20 project settings
+
+val main = PlayProject(appName, appVersion, appDependencies, mainLang = SCALA).settings(
+  resolvers += "tototoshi.github.com maven-repo/releases" at "http://tototoshi.github.com/maven-repo/releases",
+  libraryDependencies ++= Seq(
+    "com.github.tototoshi" %% "lift-json-play-module" % "0.1"
+  )
+)
+
+```
+
 
 ```scala
 
