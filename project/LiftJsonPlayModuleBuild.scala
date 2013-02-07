@@ -17,7 +17,7 @@ object LiftJsonPlayModuleBuild extends Build {
         "typesafe" at "http://repo.typesafe.com/typesafe/releases"
       ),
       libraryDependencies ++= Seq(
-        "net.liftweb" %% "lift-json" % "2.5-M4",
+        "net.liftweb" %% "lift-json" % "2.5-M4" exclude("org.specs2","specs2_2.10"),
         "play" %% "play" % "2.1.0" % "provided",
         "play" %% "play-test" % "2.1.0" % "test"
       )
