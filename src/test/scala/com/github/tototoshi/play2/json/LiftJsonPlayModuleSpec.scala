@@ -32,7 +32,7 @@ object TestApplication extends Controller with LiftJson {
   implicit val formats = DefaultFormats
 
   def get = Action { implicit request =>
-    Ok(Extraction.decompose(Person(1, "ぱみゅぱみゅ", 19)))
+    Ok(Extraction.decompose(Person(1, "ぱみゅぱみゅ", 20)))
   }
 
   def post = Action(liftJson) { implicit request =>
@@ -44,7 +44,7 @@ object TestApplication extends Controller with LiftJson {
 
 class LiftJsonPlayModuleSpec extends Specification with LiftJson {
 
-  val testJson = """{"id":1,"name":"ぱみゅぱみゅ","age":19}"""
+  val testJson = """{"id":1,"name":"ぱみゅぱみゅ","age":20}"""
 
   "LiftJsonPlayModule" should {
 
