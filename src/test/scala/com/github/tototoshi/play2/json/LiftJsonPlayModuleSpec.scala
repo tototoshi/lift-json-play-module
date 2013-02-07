@@ -44,6 +44,8 @@ object TestApplication extends Controller with LiftJson {
 
 class LiftJsonPlayModuleSpec extends Specification with LiftJson {
 
+  val testJson = """{"id":1,"name":"ぱみゅぱみゅ","age":19}"""
+
   "LiftJsonPlayModule" should {
 
     "allow you to use lift-json value as response" in {
@@ -53,12 +55,12 @@ class LiftJsonPlayModuleSpec extends Specification with LiftJson {
       val res = TestApplication.get(FakeRequest("GET", ""))
 
       contentType(res) must beEqualTo (Some("application/json"))
-      removeWhiteSpaceAndNewLine(contentAsString(res)) must beEqualTo ("""{"id":1,"name":"ぱみゅぱみゅ","age":19}""")
-
+      removeWhiteSpaceAndNewLine(contentAsString(res)) must beEqualTo (testJson)
     }
 
     "accept lift json request" in {
-      val res = TestApplication.post(FakeRequest("POST", "", FakeHeaders(Map("Content-Type" -> Seq("application/json"))), parse("""{"id":1,"name":"ぱみゅぱみゅ","age":19}""")))
+      val header = FakeHeaders(Seq(("Content-Type" -> Seq("application/json"))))
+      val res = TestApplication.post(FakeRequest("POST", "", header, parse(testJson)))
       contentAsString(res) must beEqualTo ("ぱみゅぱみゅ")
     }
 

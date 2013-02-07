@@ -21,20 +21,20 @@ import play.api.http._
 import play.api.mvc._
 import play.api.libs.iteratee._
 import net.liftweb.json.{ JValue => LiftJValue, _ }
+import scala.language.reflectiveCalls
 
-
-trait LiftJsonWriteable {
+trait LiftJsonWriteable { self: LiftJsonContentTypeOf =>
 
   implicit def writeableOf_LiftJValue(implicit codec: Codec): Writeable[LiftJValue] = {
-    Writeable[LiftJValue](jval => codec.encode((pretty(render(jval)))))
+    Writeable((jval: LiftJValue) => codec.encode((pretty(render(jval)))))
   }
 
 }
 
-trait LiftJsonContentTypeOf {
+trait LiftJsonContentTypeOf { self: LiftJsonWriteable =>
 
   implicit def contentTypeOf_JsValue(implicit codec: Codec): ContentTypeOf[LiftJValue] = {
-    ContentTypeOf[LiftJValue](Some(ContentTypes.JSON))
+    ContentTypeOf(Some(ContentTypes.JSON))
   }
 
 }
