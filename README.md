@@ -31,7 +31,7 @@ object Application extends Controller with LiftJson {
   implicit val formats = DefaultFormats
 
   def get = Action { implicit request =>
-    Ok(Extraction.decompose(Person(1, "ぱみゅぱみゅ", 19)))
+    Ok(Extraction.decompose(Person(1, "ぱみゅぱみゅ", 20)))
   }
 
   def post = Action(liftJson) { implicit request =>
